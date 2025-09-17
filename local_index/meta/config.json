@@ -1,0 +1,6 @@
+{
+  "embedding_model_name": "sentence-transformers/all-MiniLM-L6-v2",
+  "max_chunk_words": 200,
+  "chunk_overlap_words": 40,
+  "created_at": "2025-09-13T07:42:39.976975"
+}
