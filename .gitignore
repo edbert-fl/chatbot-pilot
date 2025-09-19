@@ -1,2 +1,39 @@
 *.venv
-*.env.example
+# Environment variables
+.env
+.env.local
+.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.so
+.venv/
+venv/
+ENV/
+env/
+
+# RAG Index artifacts (large files)
+local_index/embeddings/
+local_index/bm25/
+local_index/meta/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
