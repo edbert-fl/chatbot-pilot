@@ -1,0 +1,44 @@
+{
+  "greeting": "Hi! I can help you scope your chatbot. What are you looking to build? [button_group_what_chatbot]",
+  "thank_you": "Thanks! Anything else I can help with?",
+  "flows": {
+    "flow_customer_support": {
+      "start_triggers": ["i want a customer support chatbot", "customer support chatbot"],
+      "continue_prefix": "i want",
+      "sequence": [
+        { "assistant": "Great choice. Which channels do you want to support?", "tag": "button_group_channels" },
+        { "assistant": "Who will use it primarily?", "tag": "button_group_audience" },
+        { "assistant": "Could you share your contact details?", "tag": "contact_form" },
+        { "assistant": "If you'd like to move fast, you can also book a demo.", "tag": "book_demo" }
+      ]
+    },
+    "flow_sales_assistant": {
+      "start_triggers": ["i want a sales assistant chatbot", "sales assistant chatbot"],
+      "continue_prefix": "i want",
+      "sequence": [
+        { "assistant": "Awesome. Which channels should the sales assistant be on?", "tag": "button_group_channels" },
+        { "assistant": "Who will primarily use it?", "tag": "button_group_audience" },
+        { "assistant": "Let's get your contact details to follow up.", "tag": "contact_form" }
+      ]
+    },
+    "flow_internal_helpdesk": {
+      "start_triggers": ["i want an internal helpdesk chatbot", "internal helpdesk chatbot"],
+      "continue_prefix": "i want",
+      "sequence": [
+        { "assistant": "Which channels should it live on?", "tag": "button_group_channels" },
+        { "assistant": "Who will use it?", "tag": "button_group_audience" },
+        { "assistant": "Share contact details to proceed.", "tag": "contact_form" }
+      ]
+    },
+    "flow_workflow_automation": {
+      "start_triggers": ["i want a workflow automation chatbot", "workflow automation chatbot"],
+      "continue_prefix": "i want",
+      "sequence": [
+        { "assistant": "Which channels should be supported?", "tag": "button_group_channels" },
+        { "assistant": "Who's the audience?", "tag": "button_group_audience" },
+        { "assistant": "Please share your contact details.", "tag": "contact_form" }
+      ]
+    }
+  }
+}
+
