@@ -292,6 +292,44 @@ Answer:"""
                 }
             }
     
+    def generate_message(self, query: str) -> Dict[str, Any]:
+        """Generate a smooth, natural message using OpenAI without RAG."""
+        print(f"DEBUG: generate_message called with query: {query}")
+        try:
+            # Call OpenAI API with a simple prompt for message generation
+            response = self.client.chat.completions.create(
+                model=self.model,
+                messages=[
+                    {"role": "system", "content": "You are a simple message generator. Write a short message (1-2 sentences) for someone interested in a chatbot project. Do not reference any documents, sources, or external information. Do not include citations or sources. Just write a simple, natural message."},
+                    {"role": "user", "content": query}
+                ],
+                max_tokens=80,
+                temperature=0.8  # Higher temperature for more natural language
+            )
+            
+            answer = response.choices[0].message.content
+            print(f"DEBUG: Generated message: {answer}")
+            
+            return {
+                "answer": answer,
+                "citations": [],
+                "retrieval_metadata": {
+                    "query": query,
+                    "method": "message_generation",
+                    "model_used": self.model
+                }
+            }
+            
+        except Exception as e:
+            return {
+                "answer": f"Error generating message: {str(e)}",
+                "citations": [],
+                "retrieval_metadata": {
+                    "query": query,
+                    "error": str(e)
+                }
+            }
+    
     def interactive_chat(self):
         """Start an interactive chat session."""
         print("🤖 Working RAG + OpenAI Chatbot")

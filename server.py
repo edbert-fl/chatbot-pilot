@@ -28,6 +28,7 @@ class ChatRequest(BaseModel):
     model: Optional[str] = Field(None, description="Override model (defaults to server's configured model)")
     session_id: Optional[str] = Field(None, description="Client-provided session identifier for memory")
     selections: Optional[Dict[str, Any]] = Field(None, description="Structured user selections (e.g., buttons/forms)")
+    message_generation: Optional[bool] = Field(False, description="Flag to indicate this is for message generation, not regular chat")
 
 
 class ChatResponse(BaseModel):
@@ -80,6 +81,16 @@ def create_app() -> FastAPI:
         except Exception as exc:
             raise HTTPException(status_code=500, detail=str(exc))
 
+    @app.post("/generate-message", tags=["chat"])
+    def generate_message_endpoint(req: ChatRequest) -> Dict[str, Any]:
+        """Generate a simple message without RAG."""
+        try:
+            chatbot = app.state.chatbot
+            result = chatbot.generate_message(req.query)
+            return result
+        except Exception as exc:
+            raise HTTPException(status_code=500, detail=str(exc))
+
     @app.post("/chat", response_model=ChatResponse, tags=["chat"]) 
     def chat(req: ChatRequest) -> ChatResponse:
         try:
@@ -98,13 +109,22 @@ def create_app() -> FastAPI:
                 ctx.setdefault("selections", {}).update(req.selections)
             app.state.session_context[session_id] = ctx
 
-            # Build a brief user context string for the model
-            user_ctx_str = None
-            if ctx.get("selections"):
-                import json as _json
-                user_ctx_str = _json.dumps({"selections": ctx["selections"]}, ensure_ascii=False)
+            # Handle message generation differently
+            print(f"DEBUG: message_generation flag: {req.message_generation} (type: {type(req.message_generation)})")
+            print(f"DEBUG: query: {req.query}")
+            if req.message_generation == True or req.message_generation == "true" or str(req.message_generation).lower() == "true":
+                # For message generation, use a simple prompt without RAG
+                print("DEBUG: Using generate_message method")
+                result = chatbot.generate_message(req.query)
+            else:
+                print("DEBUG: Using regular chat method")
+                # Build a brief user context string for the model
+                user_ctx_str = None
+                if ctx.get("selections"):
+                    import json as _json
+                    user_ctx_str = _json.dumps({"selections": ctx["selections"]}, ensure_ascii=False)
 
-            result = chatbot.chat(req.query, max_context_chunks=req.max_context_chunks, user_context=user_ctx_str)
+                result = chatbot.chat(req.query, max_context_chunks=req.max_context_chunks, user_context=user_ctx_str)
 
             return ChatResponse(**result)
         except HTTPException:

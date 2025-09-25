@@ -14,17 +14,24 @@
         if (flowId && typeof window.enterFlow === 'function') {
           window.enterFlow(flowId);
         }
+        
+        // Prioritize data-selection over data-prompt for flow buttons
+        const selection = btn.getAttribute('data-selection');
+        if (selection) {
+          try {
+            const selections = JSON.parse(selection);
+            if (typeof window.sendFollowupSelection === 'function') {
+              await window.sendFollowupSelection(selections);
+            }
+          } catch (_) {}
+          return;
+        }
+        
         const prompt = btn.getAttribute('data-prompt');
         if (prompt && typeof window.setPromptAndSend === 'function') {
           window.setPromptAndSend(prompt);
           return;
         }
-        try {
-          const selections = JSON.parse(btn.getAttribute('data-selection'));
-          if (typeof window.sendFollowupSelection === 'function') {
-            await window.sendFollowupSelection(selections);
-          }
-        } catch (_) {}
       });
     });
   })({ currentScript: document.currentScript });
