@@ -37,3 +37,42 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
+
+# Next.js
+chatbot_ui/.next/
+chatbot_ui/out/
+chatbot_ui/build/
+chatbot_ui/dist/
+
+# Next.js dependencies
+chatbot_ui/node_modules/
+chatbot_ui/.npm
+chatbot_ui/.yarn/cache
+chatbot_ui/.yarn/unplugged
+chatbot_ui/.yarn/build-state.yml
+chatbot_ui/.yarn/install-state.gz
+chatbot_ui/.pnp.*
+
+# Next.js environment files
+chatbot_ui/.env*.local
+chatbot_ui/.env
+
+# Next.js build outputs
+chatbot_ui/.next/
+chatbot_ui/out/
+
+# Next.js cache
+chatbot_ui/.next/cache/
+
+# Next.js TypeScript
+chatbot_ui/*.tsbuildinfo
+chatbot_ui/next-env.d.ts
+
+# Next.js ESLint cache
+chatbot_ui/.eslintcache
+
+# Next.js Vercel
+chatbot_ui/.vercel
+
+# Next.js Turbo
+chatbot_ui/.turbo
