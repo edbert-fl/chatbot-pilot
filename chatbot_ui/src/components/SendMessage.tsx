@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 interface SendMessageProps {
   generateContactMessage: () => string;
@@ -10,10 +10,10 @@ export default function SendMessage({ generateContactMessage }: SendMessageProps
   const [message, setMessage] = useState('');
   const [isEditable, setIsEditable] = useState(false);
 
-  const handleGenerateMessage = () => {
+  const handleGenerateMessage = useCallback(() => {
     const generatedMessage = generateContactMessage();
     setMessage(generatedMessage);
-  };
+  }, [generateContactMessage]);
 
   const handleEdit = () => {
     setIsEditable(true);
@@ -28,7 +28,7 @@ export default function SendMessage({ generateContactMessage }: SendMessageProps
   // Generate message on component mount
   useEffect(() => {
     handleGenerateMessage();
-  }, [generateContactMessage]);
+  }, [generateContactMessage, handleGenerateMessage]);
 
   return (
     <div className="bg-panel border border-border rounded-lg p-4 my-3">

@@ -23,9 +23,37 @@ export default function ContactForm({ generateContactMessage, onSelection }: Con
     setFormData(prev => ({ ...prev, note: message }));
   }, [generateContactMessage]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSelection({ contact: formData });
+    
+    try {
+      // Send the message to your backend/email service
+      const response = await fetch('/api/send-message', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          message: formData.note,
+        }),
+      });
+
+      if (response.ok) {
+        // Message sent successfully, continue with the flow
+        onSelection({ contact: formData });
+      } else {
+        console.error('Failed to send message');
+        // Still continue with the flow even if sending fails
+        onSelection({ contact: formData });
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      // Still continue with the flow even if sending fails
+      onSelection({ contact: formData });
+    }
   };
 
   const handleChange = (field: string, value: string) => {

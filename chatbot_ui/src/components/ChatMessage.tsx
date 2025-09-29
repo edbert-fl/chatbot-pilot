@@ -4,6 +4,7 @@ import ButtonGroup from './ButtonGroup';
 import ContactForm from './ContactForm';
 import SendMessage from './SendMessage';
 import BookDemo from './BookDemo';
+import ThankYou from './ThankYou';
 import { Message, FlowsData } from '@/types';
 
 interface ChatMessageProps {
@@ -86,6 +87,8 @@ export default function ChatMessage({
         );
       case 'book_demo':
         return <BookDemo />;
+      case 'thank_you':
+        return <ThankYou />;
       default:
         return null;
     }
@@ -96,47 +99,59 @@ export default function ChatMessage({
   const hasComponents = contentParts.some((part, index) => index % 2 === 1);
 
   return (
-    <div className="border-b border-dashed border-border py-3 last:border-b-0">
-      <div className="text-xs font-semibold uppercase text-muted mb-1">
-        {message.role}
-      </div>
-      
-      <div className="whitespace-pre-wrap leading-relaxed">
-        {hasComponents ? (
-          contentParts.map((part, index) => {
-            if (index % 2 === 1) {
-              // This is a component tag
-              return (
-                <div key={index} className="mt-2">
-                  {renderComponent(part)}
-                </div>
-              );
-            } else {
-              // This is regular text
-              return part;
-            }
-          })
-        ) : (
-          message.content
+    <div className={`py-3 last:border-b-0 ${
+      message.role === 'User' 
+        ? 'flex justify-end' 
+        : 'flex justify-start'
+    }`}>
+      <div className={`max-w-[80%] ${
+        message.role === 'User' 
+          ? 'bg-blue-50 border border-blue-200 rounded-lg p-3' 
+          : 'bg-gray-50 border border-gray-200 rounded-lg p-3'
+      }`}>
+        <div className={`text-xs font-semibold uppercase mb-2 ${
+          message.role === 'User' ? 'text-blue-600' : 'text-gray-600'
+        }`}>
+          {message.role}
+        </div>
+        
+        <div className="whitespace-pre-wrap leading-relaxed">
+          {hasComponents ? (
+            contentParts.map((part, index) => {
+              if (index % 2 === 1) {
+                // This is a component tag
+                return (
+                  <div key={index} className="mt-2">
+                    {renderComponent(part)}
+                  </div>
+                );
+              } else {
+                // This is regular text
+                return part;
+              }
+            })
+          ) : (
+            message.content
+          )}
+        </div>
+
+        {message.components && (
+          <div className="mt-2 flex gap-2 flex-wrap">
+            {message.components}
+          </div>
+        )}
+
+        {message.details && (
+          <details className="mt-2">
+            <summary className="text-xs text-muted cursor-pointer">
+              Details
+            </summary>
+            <pre className="bg-bg p-2 rounded text-xs text-muted overflow-x-auto mt-1">
+              {JSON.stringify(message.details, null, 2)}
+            </pre>
+          </details>
         )}
       </div>
-
-      {message.components && (
-        <div className="mt-2 flex gap-2 flex-wrap">
-          {message.components}
-        </div>
-      )}
-
-      {message.details && (
-        <details className="mt-2">
-          <summary className="text-xs text-muted cursor-pointer">
-            Details
-          </summary>
-          <pre className="bg-bg p-2 rounded text-xs text-muted overflow-x-auto mt-1">
-            {JSON.stringify(message.details, null, 2)}
-          </pre>
-        </details>
-      )}
     </div>
   );
 }

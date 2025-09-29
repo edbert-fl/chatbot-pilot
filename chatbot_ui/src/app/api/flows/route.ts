@@ -12,7 +12,7 @@ const flows = {
         { assistant: "Great choice! Now let's determine which channels you'd like to use for your chatbot.", tag: "button_group_channels" },
         { assistant: "Perfect! Now tell me who will be using this chatbot.", tag: "button_group_audience" },
         { assistant: "Excellent! I have all the information I need. Let me prepare a message for you to send to our team.", tag: "contact_form" },
-        { assistant: "Perfect! I've prepared a message with your requirements. Review it and press send to contact our team.", tag: "send_message", message_template: "Hi! I'm interested in building a customer support chatbot. Here are my requirements:\n\n- Chatbot Type: Customer Support\n- Channels: {channels}\n- Audience: {audience}\n- Contact: {contact}\n\nPlease reach out to discuss next steps!" }
+        { assistant: "Thank you for your message! We have received your inquiry and will contact you back shortly. Our team will review your requirements and get in touch with you within 24 hours.", tag: "thank_you" }
       ]
     },
     flow_sales_assistant: {
@@ -22,7 +22,7 @@ const flows = {
         { assistant: "Great choice! Now let's determine which channels you'd like to use for your chatbot.", tag: "button_group_channels" },
         { assistant: "Perfect! Now tell me who will be using this chatbot.", tag: "button_group_audience" },
         { assistant: "Excellent! I have all the information I need. Let me prepare a message for you to send to our team.", tag: "contact_form" },
-        { assistant: "Perfect! I've prepared a message with your requirements. Review it and press send to contact our team.", tag: "send_message", message_template: "Hi! I'm interested in building a sales assistant chatbot. Here are my requirements:\n\n- Chatbot Type: Sales Assistant\n- Channels: {channels}\n- Audience: {audience}\n- Contact: {contact}\n\nPlease reach out to discuss next steps!" }
+        { assistant: "Thank you for your message! We have received your inquiry and will contact you back shortly. Our team will review your requirements and get in touch with you within 24 hours.", tag: "thank_you" }
       ]
     },
     flow_internal_helpdesk: {
@@ -32,7 +32,7 @@ const flows = {
         { assistant: "Great choice! Now let's determine which channels you'd like to use for your chatbot.", tag: "button_group_channels" },
         { assistant: "Perfect! Now tell me who will be using this chatbot.", tag: "button_group_audience" },
         { assistant: "Excellent! I have all the information I need. Let me prepare a message for you to send to our team.", tag: "contact_form" },
-        { assistant: "Perfect! I've prepared a message with your requirements. Review it and press send to contact our team.", tag: "send_message", message_template: "Hi! I'm interested in building an internal helpdesk chatbot. Here are my requirements:\n\n- Chatbot Type: Internal Helpdesk\n- Channels: {channels}\n- Audience: {audience}\n- Contact: {contact}\n\nPlease reach out to discuss next steps!" }
+        { assistant: "Thank you for your message! We have received your inquiry and will contact you back shortly. Our team will review your requirements and get in touch with you within 24 hours.", tag: "thank_you" }
       ]
     },
     flow_workflow_automation: {
@@ -42,7 +42,7 @@ const flows = {
         { assistant: "Great choice! Now let's determine which channels you'd like to use for your chatbot.", tag: "button_group_channels" },
         { assistant: "Perfect! Now tell me who will be using this chatbot.", tag: "button_group_audience" },
         { assistant: "Excellent! I have all the information I need. Let me prepare a message for you to send to our team.", tag: "contact_form" },
-        { assistant: "Perfect! I've prepared a message with your requirements. Review it and press send to contact our team.", tag: "send_message", message_template: "Hi! I'm interested in building a workflow automation chatbot. Here are my requirements:\n\n- Chatbot Type: Workflow Automation\n- Channels: {channels}\n- Audience: {audience}\n- Contact: {contact}\n\nPlease reach out to discuss next steps!" }
+        { assistant: "Thank you for your message! We have received your inquiry and will contact you back shortly. Our team will review your requirements and get in touch with you within 24 hours.", tag: "thank_you" }
       ]
     }
   }

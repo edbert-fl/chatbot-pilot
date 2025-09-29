@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import ChatMessage from '@/components/ChatMessage';
 import ChatForm from '@/components/ChatForm';
 import StatusIndicator from '@/components/StatusIndicator';
-import { Message, SessionSelections, FlowsData, ChatResponse } from '@/types';
+import { Message, SessionSelections, FlowsData } from '@/types';
 
 export default function Home() {
   const [messages, setMessages] = useState<Message[]>([]);
